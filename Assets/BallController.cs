@@ -14,24 +14,30 @@ public class BallController : MonoBehaviour
     private Vector3 lastVelocity;
     private int blockLayer;
     private float currentSpeed;
+    private bool attached = true;
+    private float attachedOffset;
 
     // Start is called before the first frame update
     void Start()
     {
         thisRigidBody = GetComponent<Rigidbody2D>();
-        thisRigidBody.velocity = new Vector3(1,1, 0)*minSpeed;
         blockLayer = LayerMask.NameToLayer("Blocks");
         paddleLength = paddle.transform.localScale.x/2;
-        currentSpeed = minSpeed;
+        attachedOffset = (paddle.transform.localScale.y/2) + (transform.localScale.y / 2);
+        ballSetup();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var v = thisRigidBody.velocity.normalized;
-        v = v*currentSpeed;
-        thisRigidBody.velocity = v;
-        lastVelocity = v;
+        if (attached) moveWithPaddle();
+        else
+        {
+            var v = thisRigidBody.velocity.normalized;
+            v = v * currentSpeed;
+            thisRigidBody.velocity = v;
+            lastVelocity = v;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -47,7 +53,6 @@ public class BallController : MonoBehaviour
             var newVelocity = newDirection * currentSpeed;
             newVelocity = new Vector3(newVelocity.x, Mathf.Max(newVelocity.y, minYSpeed), newVelocity.z);
             thisRigidBody.velocity = newVelocity;
-            print(thisRigidBody.velocity);
         }
         else
         {
@@ -61,8 +66,31 @@ public class BallController : MonoBehaviour
         }
     }
 
+    public void nextBall()
+    {
+        attached = true;
+        //TODO: Decrease ball count
+    }
+
+    private void moveWithPaddle()
+    {
+        transform.position = paddle.transform.position + new Vector3(0, attachedOffset, 0);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            attached = false;
+            ballSetup();
+        }
+    }
+
+    private void ballSetup()
+    {
+        thisRigidBody.velocity = new Vector3(0, 1, 0) * minSpeed;
+        currentSpeed = minSpeed;
+    }
+
     private float scaleDirection(float direction)
     {
         return direction / paddleLength;
     }
+
 }
