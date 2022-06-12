@@ -8,10 +8,13 @@ public class BallController : MonoBehaviour
     public float minSpeed;
     public float minYSpeed;
     public GameObject paddle;
-    public float paddleLength;
+    public ScoreController scoreController;
+    public float xMin;
+    public float xMax;
 
     private Rigidbody2D thisRigidBody;
     private Vector3 lastVelocity;
+    private float paddleLength;
     private int blockLayer;
     private float currentSpeed;
     private bool attached = true;
@@ -33,10 +36,23 @@ public class BallController : MonoBehaviour
         if (attached) moveWithPaddle();
         else
         {
+            currentSpeed = Mathf.Max(currentSpeed, minSpeed);
             var v = thisRigidBody.velocity.normalized;
+            if(Mathf.Abs(thisRigidBody.velocity.x) < 0.1 && Mathf.Abs(lastVelocity.normalized.x)<0.1)
+            {
+                v = new Vector3(v.x + 0.1f * randomSign(), v.y);
+            }
+            if (Mathf.Abs(thisRigidBody.velocity.y) < 0.1 && Mathf.Abs(lastVelocity.normalized.y) < 0.1)
+            {
+                v = new Vector3(v.x, v.y + 0.1f * randomSign());
+            }
             v = v * currentSpeed;
             thisRigidBody.velocity = v;
             lastVelocity = v;
+            if(transform.position.x < xMin || transform.position.x > xMax)
+            {
+                nextBall();
+            }
         }
     }
 
@@ -63,13 +79,14 @@ public class BallController : MonoBehaviour
         if(col.gameObject.layer == blockLayer)
         {
             Destroy(col.gameObject);
+            scoreController.addOne();
         }
     }
 
     public void nextBall()
     {
         attached = true;
-        //TODO: Decrease ball count
+        scoreController.lifeDown();
     }
 
     private void moveWithPaddle()
@@ -93,4 +110,8 @@ public class BallController : MonoBehaviour
         return direction / paddleLength;
     }
 
+    private float randomSign()
+    {
+        return Random.value < .5 ? 1 : -1;
+    }
 }

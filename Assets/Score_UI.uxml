@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="height: 100%;">
-        <ui:Label text="SCORE: 0" display-tooltip-when-elided="true" name="ScoreLabel" style="align-items: stretch; flex-direction: column; -unity-text-align: upper-right; color: rgba(58, 255, 0, 255); -unity-font-style: bold;" />
-        <ui:Label text="OOO" display-tooltip-when-elided="true" name="LivesLabel" style="-unity-text-align: upper-right; -unity-font-style: bold; color: rgba(32, 255, 0, 255);" />
-    </ui:VisualElement>
-</ui:UXML>
