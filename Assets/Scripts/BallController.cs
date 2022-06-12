@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour
     public float minSpeed;
     public float minYSpeed;
     public GameObject paddle;
-    public ScoreController scoreController;
+    public Score scoreController;
     public float xMin;
     public float xMax;
 
