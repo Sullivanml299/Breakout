@@ -1926,11 +1926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc27ff8a8da3294881fd39d0a5426c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 20
-  minSpeed: 15
+  maxSpeed: 25
+  minSpeed: 20
   minYSpeed: 10
   paddle: {fileID: 2014044458}
-  paddleLength: 0
   scoreController: {fileID: 1566549766}
   xMin: -15.5
   xMax: 15.5

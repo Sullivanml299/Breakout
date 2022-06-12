@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="height: 100%; flex-direction: row-reverse;">
-        <ui:VisualElement style="background-color: rgb(160, 160, 219); width: 10%; height: 10%; flex-wrap: nowrap; justify-content: center; color: rgba(255, 255, 255, 255);">
-            <ui:Label text="SCORE: 0" display-tooltip-when-elided="true" name="ScoreLabel" style="align-items: stretch; flex-direction: column; -unity-text-align: upper-right; color: rgb(0, 0, 0); -unity-font-style: bold; font-size: 15%; height: auto;" />
-            <ui:Label text="LIVES: 3" display-tooltip-when-elided="true" name="LivesLabel" style="-unity-text-align: upper-right; -unity-font-style: bold; color: rgb(0, 0, 0); font-size: 15%; height: auto;" />
+    <ui:VisualElement style="height: 100%; flex-direction: row-reverse; width: 100%;">
+        <ui:VisualElement style="background-color: rgba(191, 191, 197, 0); width: 100%; height: 25%; flex-wrap: nowrap; justify-content: center; color: rgb(255, 255, 255); flex-direction: row; -unity-text-align: upper-center;">
+            <ui:Label text="SCORE: 0" display-tooltip-when-elided="true" name="ScoreLabel" style="align-items: stretch; flex-direction: column; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 30%; height: 100%; width: 50%;" />
+            <ui:Label text="LIVES: 3" display-tooltip-when-elided="true" name="LivesLabel" style="-unity-text-align: middle-center; -unity-font-style: bold; color: rgb(255, 255, 255); font-size: 30%; height: 100%; width: 50%; -unity-font: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

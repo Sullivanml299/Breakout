@@ -73,7 +73,13 @@ public class BallController : MonoBehaviour
         else
         {
             newDirection = Vector3.Reflect(lastVelocity.normalized, col.contacts[0].normal);
-            thisRigidBody.velocity = newDirection * currentSpeed;
+            newDirection = newDirection * currentSpeed;
+            if(Mathf.Abs(newDirection.y)< minYSpeed)
+            {
+                var yComponent = Mathf.Sign(newDirection.y) * minYSpeed;
+                newDirection = new Vector3(newDirection.x, yComponent);
+            }
+            thisRigidBody.velocity = newDirection;
         }
         
         if(col.gameObject.layer == blockLayer)

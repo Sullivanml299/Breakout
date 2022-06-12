@@ -10,6 +10,7 @@ public class ScoreController : MonoBehaviour
     Label livesLabel;
     static public int score;
     static public int lives;
+    private int maxScore = 60;
 
     private void Start()
     {
@@ -29,6 +30,14 @@ public class ScoreController : MonoBehaviour
     {
         score += 1;
         scoreLabel.text = "SCORE: " + score.ToString();
+        if (score >= maxScore) vicotry();
+    }
+
+    private void vicotry()
+    {
+        Victory.score = score;
+        Victory.lastScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Victory");
     }
 
     public void lifeDown()

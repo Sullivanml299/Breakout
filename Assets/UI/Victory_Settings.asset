@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Score_Settings
+  m_Name: Victory_Settings
   m_EditorClassIdentifier: 
   themeUss: {fileID: -4733365628477956816, guid: a28cb7658a083a54c9b735401b0f18d4, type: 3}
   m_TargetTexture: {fileID: 0}
