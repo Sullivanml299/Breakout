@@ -11,7 +11,11 @@ public class BallController : MonoBehaviour
     public Score scoreController;
     public float xMin;
     public float xMax;
+    public Transform exploderTransform;
+    public ParticleSystem exploder;
+    public ParticleSystem trail;
 
+    private SpriteRenderer thisRenderer;
     private Rigidbody2D thisRigidBody;
     private Vector3 lastVelocity;
     private float paddleLength;
@@ -24,6 +28,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         thisRigidBody = GetComponent<Rigidbody2D>();
+        thisRenderer = GetComponent<SpriteRenderer>();
         blockLayer = LayerMask.NameToLayer("Blocks");
         paddleLength = paddle.transform.localScale.x/2;
         attachedOffset = (paddle.transform.localScale.y/2) + (transform.localScale.y / 2);
@@ -83,7 +88,10 @@ public class BallController : MonoBehaviour
         }
         
         if(col.gameObject.layer == blockLayer)
-        {
+        {   
+            var color = col.gameObject.GetComponent<SpriteRenderer>().color;
+            explode(col.gameObject.transform.position, color);
+            takeColor(color);
             Destroy(col.gameObject);
             scoreController.addOne();
         }
@@ -119,5 +127,19 @@ public class BallController : MonoBehaviour
     private float randomSign()
     {
         return Random.value < .5 ? 1 : -1;
+    }
+
+    private void explode(Vector3 pos, Color color)
+    {
+        exploderTransform.position = pos;
+        var main = exploder.main;
+        main.startColor = color;
+        exploder.Play();
+    }
+
+    private void takeColor(Color color){
+        thisRenderer.color = color;
+        var main = trail.main;
+        main.startColor = color;
     }
 }
